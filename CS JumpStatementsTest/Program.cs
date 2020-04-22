@@ -14,14 +14,10 @@ namespace CS_JumpStatementsTest
 
         static void Main(string[] args)
         {
-            Console.WriteLine("TRUE: " + true.ToString());
-
-            while (true)
-            {
-                Console.WriteLine("Returned: " + IfTest(Console.ReadLine()));
+            
+                Console.WriteLine("Returned: " );
 
                 Console.Read();
-            }
         }
 
         #region Arcade
@@ -331,13 +327,75 @@ namespace CS_JumpStatementsTest
 
         #region Intro
 
+        #region Diving Deeper
+
+        #region arrayMaxConsecutiveSum
+
+        int arrayMaxConsecutiveSum(int[] inputArray, int k)
+        {
+            int max = int.MinValue, sum = 0, pre = 0;
+            for (int i = 0; i <= inputArray.Length - k; ++i)
+            {
+                if (i == 0)
+                {
+                    for (int j = 0; j < k; ++j)
+                        sum += inputArray[i + j];
+                    pre = sum;
+                }
+                else
+                {
+                    sum = pre - inputArray[i - 1] + inputArray[i + k - 1];
+                    pre = sum;
+
+                }
+                if (sum > max) max = sum;
+            }
+            return max;
+        }
+
+        #endregion
+
+        #region differentSymbolsNaive
+
+        int differentSymbolsNaive(string s)
+        {
+            return s.Distinct().Count();
+        }
+
+        #endregion
+
+        #region firstDigit
+
+        char firstDigit(string inputString)
+        {
+            return inputString.Where(x => char.IsDigit(x)).FirstOrDefault();
+        }
+
+        #endregion
+
+        #region extractEachKth
+
+        int[] extractEachKth(int[] inputArray, int k)
+        {
+            return inputArray.Where((val, index) => (index + 1) % k != 0).ToArray();
+        }
+
+        #endregion
+
+        #endregion
+
         #region Through the Fog
 
         #region stringsRearrangement
 
         bool stringsRearrangement(string[] inputArray)
         {
-            return false;
+            return inputArray.Any(x => Sort(inputArray, x));
+        }
+
+        bool Sort(string[] inputArray, string str)
+        {
+            return !inputArray.Any() | inputArray.Where((x, i) => x.Where((l, j) => l != str[j]).Count() == 1 && Sort(inputArray.Where((o, j) => i != j).ToArray(), x)).Any();
         }
 
         #endregion
