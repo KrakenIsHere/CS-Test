@@ -15,7 +15,7 @@ namespace CS_JumpStatementsTest
         static void Main(string[] args)
         {
             
-                Console.WriteLine("Returned: " );
+                Console.WriteLine("Returned: " + longestDigitsPrefix("12LolIam696herenow32"));
 
                 Console.Read();
         }
@@ -326,6 +326,113 @@ namespace CS_JumpStatementsTest
         #endregion
 
         #region Intro
+
+        #region Eruption Of Light
+
+        #region buildPalindrome
+
+        string buildPalindrome(string st)
+        {
+
+        }
+
+        #endregion
+
+        #region findEmailDomain
+
+        string findEmailDomain(string address)
+        {
+            return address.Split('@')[address.Split('@').Count() - 1];
+        }
+
+        #endregion
+
+        #region isBeautifulString
+
+        bool isBeautifulString(string inputString)
+        {
+            int[] count = new int[26];
+            foreach (var s in inputString)
+            {
+                count[s - 97]++;
+            }
+            for (int i = 0; i < 25; ++i)
+            {
+                if (count[i] < count[i + 1]) return false;
+            }
+            return true;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Dark Wilderness
+
+        #region knapsackLight
+
+        int knapsackLight(int value1, int weight1, int value2, int weight2, int maxW, bool ball = true)
+        {
+            return weight1 + weight2 <= maxW ? value1 + value2 : value1 > value2 && weight1 <= maxW ? value1 : weight2 <= maxW ? value2 : weight1 <= maxW ? value1 : 0;
+        }
+
+        #endregion
+
+        #region longestDigitsPrefix
+
+        static string longestDigitsPrefix(string inputString)
+        {
+            string result = "";
+
+            foreach (char chr in inputString)
+            {
+                try
+                {
+                    result += int.Parse(chr.ToString());
+                }
+                catch
+                {
+                    return result;
+                }
+            }
+            return result;
+        }
+
+        #endregion
+
+        #region digitDegree
+        static int digitDegree(int n)
+        {
+            var newCalc = n.ToString(); ;
+            var calcs = 0;
+
+            while (newCalc.Length > 1)
+            {
+                var calc = 0;
+
+                foreach (char chr in newCalc)
+                {
+                    calc += int.Parse(chr.ToString());
+                }
+
+                calcs++;
+                newCalc = calc.ToString();
+            }
+            return calcs;
+        }
+
+        #endregion
+
+        #region bishopAndPawn
+
+        bool bishopAndPawn(string bishop, string pawn)
+        {
+            return Math.Abs(bishop[0] - pawn[0]) == Math.Abs(bishop[1] - pawn[1]);
+        }
+
+        #endregion
+
+        #endregion
 
         #region Diving Deeper
 
@@ -1652,6 +1759,16 @@ namespace CS_JumpStatementsTest
         #endregion
     }
 
+    class ItemNode
+    {
+        public int value { get; set; }
+        public int weight { get; set; }
+
+        public int weightToValue
+        {
+            get { return value / weight; }
+        }
+    }
     class ListNode<T>
     {
         public T value { get; set; }
