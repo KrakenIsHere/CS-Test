@@ -327,13 +327,75 @@ namespace CS_JumpStatementsTest
 
         #region Intro
 
+        #region Rainbow Of Clarity
+
+        #region lineEncoding
+
+        string lineEncoding(string s)
+        {
+
+        }
+
+        #endregion
+
+        #region isDigit
+
+        bool isDigit(char symbol)
+        {
+            try
+            {
+                var i = int.Parse(symbol.ToString());
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        #endregion
+
+        #endregion
+
         #region Eruption Of Light
+
+        #region isMAC48Address
+
+        bool isMAC48Address(string inputString)
+        {
+            return Regex.IsMatch(inputString, @"^[0-9A-F]{2}(-[0-9A-F]{2}){5}$");
+        }
+
+        #endregion
+
+        #region electionsWinners
+
+        int electionsWinners(int[] votes, int k)
+        {
+            int max = votes.Max();
+            if (votes.Count(x => x == max) == 1 && k == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return votes.Count(x => x + k > max);
+            }
+        }
+
+
+        #endregion
 
         #region buildPalindrome
 
         string buildPalindrome(string st)
         {
-
+            var len = st.Length;
+            var ci = 0;
+            while (st != string.Concat(st.Reverse()))
+                st = st.Insert(len, st[ci++].ToString());
+            return st;
         }
 
         #endregion
