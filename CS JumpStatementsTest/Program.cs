@@ -15,7 +15,7 @@ namespace CS_JumpStatementsTest
         static void Main(string[] args)
         {
             
-                Console.WriteLine("Returned: " + longestDigitsPrefix("12LolIam696herenow32"));
+                Console.WriteLine("Returned: " + lineEncoding("aabbbc"));
 
                 Console.Read();
         }
@@ -329,11 +329,66 @@ namespace CS_JumpStatementsTest
 
         #region Rainbow Of Clarity
 
-        #region lineEncoding
+        #region deleteDigit
 
-        string lineEncoding(string s)
+        int deleteDigit(int n)
         {
 
+        }
+
+        #endregion
+
+        #region chessKnight
+
+        int chessKnight(string cell)
+        {
+            int i = Math.Min(cell[0] + 2, 'h') - Math.Max(cell[0] - 2, 'a');
+            int ii = Math.Min(cell[1] + 2, '8') - Math.Max(cell[1] - 2, '1');
+            return (i * ii) / 2;
+        }
+
+        #endregion
+
+        #region lineEncoding
+
+        static string lineEncoding(string s)
+        {
+            var last = "";
+            var count = 1;
+            var newS = "";
+
+            foreach (char chr in s)
+            {
+                if (chr.ToString() != last)
+                {
+                    if (count > 1)
+                    {
+                        newS += $"{count}{last}";
+                    }
+                    else
+                    {
+                        newS += $"{last}";
+                    }
+
+                    last = chr.ToString();
+                    count = 1;
+                }
+                else
+                {
+                    count++;
+                }
+            }
+
+            if (count > 1)
+            {
+                newS += $"{count}{last}";
+            }
+            else
+            {
+                newS += $"{last}";
+            }
+
+            return newS;
         }
 
         #endregion
