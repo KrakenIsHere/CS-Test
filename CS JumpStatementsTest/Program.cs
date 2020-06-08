@@ -327,13 +327,56 @@ namespace CS_JumpStatementsTest
 
         #region Intro
 
+        #region Land of Logic
+
+        #region differentSquares
+
+        int differentSquares(int[][] matrix)
+        {
+
+        }
+
+        #endregion
+
+        #region sumUpNumbers
+
+        int sumUpNumbers(string inputString)
+        {
+            var matches = Regex.Matches(inputString, @"\d+");
+            return matches.Cast<Match>().Select(i => int.Parse(i.Value)).Sum();
+        }
+
+        #endregion
+
+        #region validTime
+
+        bool validTime(string time)
+        {
+            var numbers = time.Split(':');
+            return int.Parse(numbers[0]) < 24 && int.Parse(numbers[0]) >= 0
+                && int.Parse(numbers[1]) < 60 && int.Parse(numbers[1]) >= 0;
+        }
+
+        #endregion
+
+        #region longestWord
+
+        string longestWord(string text)
+        {
+            return Regex.Split(text, @"[^a-zA-Z]+").OrderByDescending(i => i.Length).First();
+        }
+
+        #endregion
+
+        #endregion
+
         #region Rainbow Of Clarity
 
         #region deleteDigit
 
         int deleteDigit(int n)
         {
-
+            return int.Parse(n.ToString().Select((c, i) => n.ToString().Remove(i, 1)).Max());
         }
 
         #endregion
