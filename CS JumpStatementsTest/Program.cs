@@ -329,11 +329,57 @@ namespace CS_JumpStatementsTest
 
         #region Land of Logic
 
+        #region fileNaming
+
+        string[] fileNaming(string[] names)
+        {
+
+        }
+
+        #endregion
+
+        #region digitsProduct
+
+        int digitsProduct(int product)
+        {
+            List<int> l = new List<int>();
+            int ii = 0;
+            if (product == 0) return 10;
+            if (product == 1) return 1;
+            for (int d = 9; d > 1; d--)
+            {
+                while (product % d == 0)
+                {
+                    product /= d;
+                    l.Add(d);
+                }
+            }
+            if (product > 1) return -1;
+
+            for (int i = l.Count - 1; i >= 0; i--)
+            {
+                ii = 10 * ii + l[i];
+            }
+            return ii;
+        }
+
+        #endregion
+
         #region differentSquares
 
         int differentSquares(int[][] matrix)
         {
-
+            List<int> sq = new List<int>();
+            int cols = matrix[0].Length;
+            for (int i = 0; i < matrix.Length - 1; i++)
+            {
+                for (int j = 0; j < cols - 1; j++)
+                {
+                    int num = (matrix[i][j] * 1000) + (matrix[i][j + 1] * 100) + (matrix[i + 1][j] * 10) + matrix[i + 1][j + 1];
+                    sq.Add(num);
+                }
+            }
+            return (sq.Distinct().Count());
         }
 
         #endregion
