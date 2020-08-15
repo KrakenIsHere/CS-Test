@@ -327,6 +327,28 @@ namespace CS_JumpStatementsTest
 
         #region Intro
 
+        #region Dark Wilderness
+
+        #region knapsackLight
+
+        int knapsackLight(int value1, int weight1, int value2, int weight2, int maxW)
+        {
+
+        }
+
+        #region growingPlant
+
+        int growingPlant(int upSpeed, int downSpeed, int desiredHeight)
+        {
+            if (desiredHeight <= upSpeed)
+                return 1;
+            return (desiredHeight - upSpeed - 1) / (upSpeed - downSpeed) + 2;
+        }
+
+        #endregion
+
+        #endregion
+
         #region Diving Deeper
 
         #region arrayMaxConsecutiveSum
