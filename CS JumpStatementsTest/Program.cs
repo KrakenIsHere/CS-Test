@@ -22,43 +22,33 @@ namespace CS_JumpStatementsTest
 
         #region Arcade
 
-        #region Core
+        #region The Core
+
+        #region At the Crossroads
+
+        #region willYou
+        bool willYou(bool young, bool beautiful, bool loved)
+        {
+
+            return false;
+        }
+        #endregion
 
         #region tennisSet
 
         static bool tennisSet(int score1, int score2)
         {
-            if (score1 == 0 && score2 == 0)
+            if (Math.Min(score1, score2) >= 7)
             {
                 return false;
             }
 
-            if (score1 >= 7 && score2 >= 7)
+            if (Math.Min(score1, score2) >= 5)
             {
-                return false;
+                return Math.Max(score1, score2) == 7;
             }
 
-            if (score1 > 7 || score2 > 7)
-            {
-                return false;
-            }
-
-            if (score1 > 6 && score2 < 5 || score2 > 6 && score1 < 5)
-            {
-                return false;
-            }
-
-            if (score1 == 6 && score2 == 5 || score2 == 6 && score1 == 5)
-            {
-                return false;
-            }
-
-            if (score1 > score2 + 1 || score2 > score1 + 1)
-            {
-                return true;
-            }
-
-            return true;
+            return Math.Max(score1, score2) == 6;
         }
 
         #endregion
@@ -178,6 +168,10 @@ namespace CS_JumpStatementsTest
         }
 
         #endregion
+
+        #endregion
+
+        #region Intro Gates
 
         #region Phone Call
 
@@ -325,16 +319,367 @@ namespace CS_JumpStatementsTest
 
         #endregion
 
-        #region Intro
+        #endregion
+
+        #region Intro (DONE)
+
+        #region Land of Logic
+
+        #region sudoku
+        bool sudoku(int[][] grid)
+        {
+            int[] intArray = new int[9];
+            int index = 0;
+            foreach (var i in grid)
+            {
+                if (i.Length != i.Distinct().Count()) return false;
+            }
+
+            for (int x = 0; x < 9; x++)
+            {
+                for (int i = 0; i < 9; i++)
+                    intArray[i] = grid[i][x];
+
+                if (intArray.Length != intArray.Distinct().Count()) return false;
+            }
+
+            for (int i = 0; i < 9; i += 3)
+            {
+                for (int x = 0; x < 9; x += 3)
+                {
+                    for (int y = i; y < i + 3; y++)
+                        for (int n = x; n < x + 3; n++)
+                        {
+                            intArray[index++] = grid[y][n];
+                        }
+
+                    index = 0;
+                    if (intArray.Length != intArray.Distinct().Count())
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        #endregion
+
+        #region spiralNumbers
+        int[][] spiralNumbers(int n)
+        {
+            int[][] ans = new int[n][];
+            for (int i = 0; i < n; i++)
+                ans[i] = new int[n];
+
+            int i0 = 1, i1 = 0;
+            for (; n > 0; n -= 2)
+            {
+                for (int x = 0; x < n; x++) ans[i1][x + i1] = i0++;
+                for (int y = i1 + 1; y < n + i1; y++) ans[y][n - 1 + i1] = i0++;
+                for (int z = n - 2 + i1; z >= i1; z--) ans[n - 1 + i1][z] = i0++;
+                for (int a = n - 2 + i1; a > i1; a--) ans[a][i1] = i0++;
+                i1++;
+            }
+            return ans;
+
+        }
+
+        #region messageFromBinaryCode
+        string messageFromBinaryCode(string code)
+        {
+            var sb = new StringBuilder();
+            for (int i = 0; i < code.Length; i += 8)
+            {
+                sb.Append((char)Convert.ToInt32(code.Substring(i, 8), 2));
+            }
+            return sb.ToString();
+        }
+        #endregion
+
+        #region fileNaming
+        string[] fileNaming(string[] names)
+        {
+            var list = new List<string>();
+            foreach (var n in names)
+            {
+                var nn = n;
+                var i = 1;
+                while (list.Contains(nn))
+                {
+                    nn = $"{n}({i})";
+                    i++;
+                }
+                list.Add(nn);
+            }
+            return list.ToArray();
+        }
+        #endregion
+
+        #region digitsProduct
+        int digitsProduct(int product)
+        {
+            List<int> l = new List<int>();
+            int ans = 0;
+            if (product == 0) return 10;
+            if (product == 1) return 1;
+            for (int d = 9; d > 1; d--)
+            {
+                while (product % d == 0)
+                {
+                    product /= d;
+                    l.Add(d);
+                }
+            }
+            if (product > 1) return -1;
+
+            for (int i = l.Count - 1; i >= 0; i--)
+            {
+                ans = 10 * ans + l[i];
+            }
+            return ans;
+        }
+        #endregion
+
+        #region differentSquares
+        int differentSquares(int[][] matrix)
+        {
+            List<int> sq = new List<int>();
+            int cols = matrix[0].Length;
+            for (int i = 0; i < matrix.Length - 1; i++)
+            {
+                for (int j = 0; j < cols - 1; j++)
+                {
+                    int num = (matrix[i][j] * 1000) + (matrix[i][j + 1] * 100) + (matrix[i + 1][j] * 10) + matrix[i + 1][j + 1];
+                    sq.Add(num);
+                }
+            }
+            return (sq.Distinct().Count());
+        }
+        #endregion
+
+        #region sumUpNumbers
+        int sumUpNumbers(string inputString)
+        {
+            var matches = Regex.Matches(inputString, @"\d+");
+            return matches.Cast<Match>().Select(i => int.Parse(i.Value)).Sum();
+        }
+        #endregion
+
+        #region validTime
+        bool validTime(string time)
+        {
+            var numbers = time.Split(':');
+            return int.Parse(numbers[0]) < 24 && int.Parse(numbers[0]) >= 0
+                && int.Parse(numbers[1]) < 60 && int.Parse(numbers[1]) >= 0;
+        }
+        #endregion
+
+        #region longestWord
+        string longestWord(string text)
+        {
+            return Regex.Split(text, @"[^a-zA-Z]+").OrderByDescending(i => i.Length).First();
+        }
+        #endregion
+
+        #endregion
+
+        #region Rainbow of Clarity
+
+        #region deleteDigit
+        int deleteDigit(int n)
+        {
+            return int.Parse(n.ToString().Select((c, i) => n.ToString().Remove(i, 1)).Max());
+        }
+        #endregion
+
+        #region chessKnight
+        int chessKnight(string cell)
+        {
+            int i = Math.Min(cell[0] + 2, 'h') - Math.Max(cell[0] - 2, 'a');
+            int ii = Math.Min(cell[1] + 2, '8') - Math.Max(cell[1] - 2, '1');
+            return (i * ii) / 2;
+        }
+        #endregion
+
+        #region lineEncoding
+        string lineEncoding(string s)
+        {
+            var last = "";
+            var count = 1;
+            var newS = "";
+
+            foreach (char chr in s)
+            {
+                if (chr.ToString() != last)
+                {
+                    if (count > 1)
+                    {
+                        newS += $"{count}{last}";
+                    }
+                    else
+                    {
+                        newS += $"{last}";
+                    }
+
+                    last = chr.ToString();
+                    count = 1;
+                }
+                else
+                {
+                    count++;
+                }
+            }
+
+            if (count > 1)
+            {
+                newS += $"{count}{last}";
+            }
+            else
+            {
+                newS += $"{last}";
+            }
+
+            return newS;
+        }
+        #endregion
+
+        #region isDigit
+        bool isDigit(char symbol)
+        {
+            try
+            {
+                var i = int.Parse(symbol.ToString());
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        #endregion
+
+        #endregion
+
+        #region Eruption of Light
+
+        #region isMAC48Address
+        bool isMAC48Address(string inputString)
+        {
+            return Regex.IsMatch(inputString, @"^[0-9A-F]{2}(-[0-9A-F]{2}){5}$");
+        }
+        #endregion
+
+        #region electionsWinners
+        int electionsWinners(int[] votes, int k)
+        {
+            int max = votes.Max();
+            if (votes.Count(x => x == max) == 1 && k == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return votes.Count(x => x + k > max);
+            }
+        }
+        #endregion
+
+        #region buildPalindrome
+        string buildPalindrome(string st)
+        {
+            var len = st.Length;
+            var ci = 0;
+            while (st != string.Concat(st.Reverse()))
+                st = st.Insert(len, st[ci++].ToString());
+            return st;
+        }
+        #endregion
+
+        #region findEmailDomain
+        string findEmailDomain(string address)
+        {
+            return address.Split('@')[address.Split('@').Count() - 1];
+        }
+        #endregion
+
+        #region isBeautifulString
+        bool isBeautifulString(string inputString)
+        {
+            int[] count = new int[26];
+            foreach (var s in inputString)
+            {
+                count[s - 97]++;
+            }
+            for (int i = 0; i < 25; ++i)
+            {
+                if (count[i] < count[i + 1]) return false;
+            }
+            return true;
+        }
+        #endregion
+
+        #endregion
 
         #region Dark Wilderness
 
+        #region bishopAndPawn
+        bool bishopAndPawn(string bishop, string pawn)
+        {
+            return Math.Abs(bishop[0] - pawn[0]) == Math.Abs(bishop[1] - pawn[1]);
+        }
+        #endregion
+
+        #region digitDegree
+        int digitDegree(int n)
+        {
+            var newCalc = n.ToString(); ;
+            var calcs = 0;
+
+            while (newCalc.Length > 1)
+            {
+                var calc = 0;
+
+                foreach (char chr in newCalc)
+                {
+                    calc += int.Parse(chr.ToString());
+                }
+
+                calcs++;
+                newCalc = calc.ToString();
+            }
+            return calcs;
+        }
+        #endregion
+
+        #region longestDigitsPrefix
+        string longestDigitsPrefix(string inputString)
+        {
+            string result = "";
+
+            foreach (char chr in inputString)
+            {
+                try
+                {
+                    result += int.Parse(chr.ToString());
+                }
+                catch
+                {
+                    return result;
+                }
+            }
+            return result;
+        }
+        #endregion
+
         #region knapsackLight
 
-        int knapsackLight(int value1, int weight1, int value2, int weight2, int maxW)
+        int knapsackLight2(int value1, int weight1, int value2, int weight2, int maxW)
         {
-
+            return weight1 + weight2 <= maxW ? value1 + value2 : value1 > value2 && weight1 <= maxW ? value1 : weight2 <= maxW ? value2 : weight1 <= maxW ? value1 : 0;
         }
+
+        #endregion
 
         #region growingPlant
 
@@ -1096,6 +1441,7 @@ namespace CS_JumpStatementsTest
 
         #endregion
 
+        #endregion
 
         #region Interview Practice
 
