@@ -24,13 +24,73 @@ namespace CS_JumpStatementsTest
 
         #region The Core
 
+        #region Corner of 0s and 1s
+
+        #region secondRightmostZeroBit
+        int secondRightmostZeroBit(int n)
+        {
+            
+        }
+        #endregion
+
+        #region mirrorBits
+        int mirrorBits(int a)
+        {
+            int i = 0;
+            while (a > 0)
+            {
+                i <<= 1;
+                i |= a & 1;
+                a >>= 1;
+            }
+
+            return i;
+        }
+        #endregion
+
+        #region rangeBitCount
+        int rangeBitCount(int a, int b)
+        {
+            int total = 0;
+            while (a <= b)
+            {
+                total += Convert.ToString(a, 2).Split('1').Length - 1;
+
+                a++;
+            }
+            return total;
+        }
+        #endregion
+
+        #region arrayPacking
+        int arrayPacking(int[] a)
+        {
+            return a.Reverse().Aggregate((x, y) => (x << 8) + y);
+        }
+        #endregion
+
+        #region killKthBit
+        int killKthBit(int n, int k)
+        {
+            return n & ~(1 << (k - 1));
+        }
+        #endregion
+
+        #endregion
+
         #region At the Crossroads
+
+        #region metroCard
+        int[] metroCard(int lastNumberOfDays)
+        {
+            return (lastNumberOfDays == 30 || lastNumberOfDays == 28) ? new[] { 31 } : new[] { 28, 30, 31 };
+        }
+        #endregion
 
         #region willYou
         bool willYou(bool young, bool beautiful, bool loved)
         {
-
-            return false;
+            return (young && beautiful) != loved;
         }
         #endregion
 
